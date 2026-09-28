@@ -29,3 +29,5 @@ This local checkout tracks `origin/main`. Stage the intended files, commit, and 
 The author name reveals contact and donation actions on hover, click/tap, or keyboard. The message dialog is implemented, but sending stays disabled until an approved public form-service endpoint is configured in `contact.js`. Never place a recipient email, secret API key, or payment credentials in this public repository.
 
 `donate.html` currently explains that payments are unavailable. A payment provider, currency, available amounts, and a confirmed process for the 25% contribution to Alzheimer's Research UK are needed before enabling checkout. No payments are collected by this placeholder.
+
+The current public PDF has had its email address redacted. Future PDF replacements should omit that address too. Update the PDF URL version in `index.html` and `gallery.js` when replacing it to refresh cached previews. Older Git history contains the original PDF.
