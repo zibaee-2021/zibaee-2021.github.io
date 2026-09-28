@@ -25,3 +25,8 @@ footer em { font-style: italic; }
   h1 { font-size: 40px; }
   .author, .open-link, footer, .pdf-controls { font-size: 24px; }
 }
+
+/* Compact gallery header, retaining the existing type scale elsewhere. */
+header h1 { font-size: clamp(30.6px, 3.74vw, 44.2px); }
+.author-name { font-size: 20.4px; }
+@media (max-width: 650px) { header h1 { font-size: 34px; } }

@@ -16,11 +16,7 @@
 .open-link{font-size:14px;line-height:1.5;color:#325c72;text-decoration:underline;text-underline-offset:4px}
 .open-link:focus-visible,button:focus-visible{outline:3px solid #325c72;outline-offset:4px}
 .panel-note{font-size:14px;line-height:1.6;color:var(--muted);margin:14px 0 0}
-.pdf-controls{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:24px;min-height:36px;font-size:14px}
-.pdf-controls button{font:inherit;font-size:16px;line-height:1;background:#3b3f43;border:0;border-radius:3px;height:29.33px;padding:0;color:#fff;cursor:pointer}
-#pdf-prev{width:76px}
-#pdf-next{width:61.42px}
-.pdf-controls button:disabled{background:#62666a;cursor:default}
+.pdf-controls{display:flex;justify-content:center;margin-top:12px;min-height:30px}
 figure:hover .preview{transform:none}
 
 .panel-caption{justify-content:flex-end;margin:0 0 12px}
@@ -47,6 +43,18 @@ dialog::backdrop{background:#18252066}
 .contact-send{font:inherit;border:0;border-radius:4px;padding:11px 18px;background:var(--accent);color:white;cursor:pointer}
 .contact-send:disabled{opacity:.5;cursor:default}
 @media(max-width:650px){.author{margin-top:6px;display:inline-block}.author-actions{left:0;right:auto}}
+
+header{padding-bottom:16px}
+.open-link{position:relative;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid #c7cbc3;border-radius:5px;background:var(--paper);text-decoration:none}
+.open-link svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.icon-label{position:absolute;bottom:calc(100% + 5px);right:0;white-space:nowrap;background:#3b3f43;color:white;padding:3px 8px;border-radius:4px;font-size:20px;opacity:0;pointer-events:none}
+.open-link:hover .icon-label,.open-link:focus-visible .icon-label{opacity:1}
+.page-turn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:56px;border:0;border-radius:6px;background:#3b3f43e8;color:white;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;cursor:pointer;z-index:2}
+.page-turn svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#pdf-prev{left:10px}#pdf-next{right:10px}
+.pdf-page[data-nav-side="prev"] #pdf-prev:not(:disabled),.pdf-page[data-nav-side="next"] #pdf-next:not(:disabled),.page-turn:focus-visible{opacity:1;pointer-events:auto}
+.page-turn:disabled{visibility:hidden}
+@media(hover:none),(pointer:coarse){.page-turn:not(:disabled){opacity:1;pointer-events:auto}}
 </style>
 <link rel="stylesheet" href="typography.css">
 </head>
@@ -60,18 +68,19 @@ dialog::backdrop{background:#18252066}
 </div></header>
 <main aria-label="Projects"><div class="gallery">
 <figure>
-<figcaption class="panel-caption"><a class="open-link" href="https://salsa-maru.onrender.com/" target="_blank" rel="noopener">open app</a></figcaption>
+<figcaption class="panel-caption"><a class="open-link" href="https://salsa-maru.onrender.com/" target="_blank" rel="noopener" aria-label="open app"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01M10 12l5 2.5-5 2.5z"/></svg><span class="icon-label">open app</span></a></figcaption>
 <div class="preview app live-app" id="salsa-preview">
 <iframe id="salsa-frame" src="https://salsa-maru.onrender.com/" title="SALSA interactive sequence analysis application" width="840" height="1188" loading="eager"></iframe>
 </div>
 </figure>
 <figure>
-<figcaption class="panel-caption"><a class="open-link" href="manuscripts/SALSA_WebApp.pdf?v=e2b81161bb" target="_blank" rel="noopener">open PDF</a></figcaption>
+<figcaption class="panel-caption"><a class="open-link" href="manuscripts/SALSA_WebApp.pdf?v=e2b81161bb" target="_blank" rel="noopener" aria-label="open PDF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h6"/></svg><span class="icon-label">open PDF</span></a></figcaption>
 <div class="preview paper pdf-page" id="pdf-page" role="group" aria-label="Manuscript PDF preview">
-<canvas id="pdf-canvas" role="img" aria-label="Manuscript page"><p>Read the manuscript using the Open PDF link below.</p></canvas>
+<canvas id="pdf-canvas" role="img" aria-label="Manuscript page"><p>Read the manuscript using the open PDF icon above.</p></canvas>
 <p id="pdf-message" role="status">Loading manuscript…</p>
+<button class="page-turn" id="pdf-prev" type="button" disabled aria-label="Previous manuscript page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button class="page-turn" id="pdf-next" type="button" disabled aria-label="Next manuscript page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
 </div>
-<div class="pdf-controls" aria-label="Manuscript page navigation"><button id="pdf-prev" type="button" disabled aria-label="Previous manuscript page">←</button><span id="pdf-counter" role="status" aria-live="polite">Loading…</span><button id="pdf-next" type="button" disabled aria-label="Next manuscript page">→</button></div>
+<div class="pdf-controls"><span id="pdf-counter" role="status" aria-live="polite">Loading…</span></div>
 </figure>
 <figure class="ideas">
 <div class="preview board" role="img" aria-label="Wide ideas blackboard: white chalk on a blackboard connects a question to an experiment and a new idea."><svg viewBox="0 0 594 420" aria-hidden="true"><text x="42" y="67" class="chalk" font-size="29">What if…</text><path d="M44 78Q102 83 151 77"></path><text x="64" y="167" class="chalk" font-size="23">a question</text><ellipse cx="121" cy="160" rx="91" ry="40"></ellipse><path d="M215 160Q250 142 280 158M268 146L283 158L269 167"></path><text x="300" y="167" class="chalk" font-size="23">an experiment</text><path d="M293 182Q378 187 464 180M392 204Q398 250 342 272M347 257L340 274L356 273"></path><text x="207" y="310" class="chalk" font-size="28">a new idea?</text><path d="M199 322Q281 329 368 320M180 292Q84 277 110 215M98 225L110 211L118 228"></path><text x="389" y="368" class="chalk" font-size="18" transform="rotate(-5 389 368)">keep exploring.</text></svg></div>

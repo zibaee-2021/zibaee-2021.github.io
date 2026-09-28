@@ -39,7 +39,7 @@ async function renderPage() {
     counter.textContent = `${pageNumber} / ${pdf.numPages}`;
     message.hidden = true;
   } catch (error) {
-    message.textContent = 'Preview unavailable. Use Open PDF below.';
+    message.textContent = 'Preview unavailable. Use the open PDF icon above.';
     message.hidden = false;
     console.error('PDF rendering failed', error);
   } finally {
@@ -64,6 +64,12 @@ try {
   await renderPage();
 } catch (error) {
   counter.textContent = 'Preview unavailable';
-  message.textContent = 'Unable to load the preview. Use Open PDF below.';
+  message.textContent = 'Unable to load the preview. Use the open PDF icon above.';
   console.error('PDF loading failed', error);
 }
+
+panel.addEventListener('pointermove', event => {
+  const bounds = panel.getBoundingClientRect();
+  panel.dataset.navSide = event.clientX < bounds.left + bounds.width / 2 ? 'prev' : 'next';
+});
+panel.addEventListener('pointerleave', () => { delete panel.dataset.navSide; });
