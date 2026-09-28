@@ -49,8 +49,8 @@ header{padding-bottom:16px}
 .open-link svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .icon-label{position:absolute;bottom:calc(100% + 5px);right:0;white-space:nowrap;background:#3b3f43;color:white;padding:3px 8px;border-radius:4px;font-size:20px;opacity:0;pointer-events:none}
 .open-link:hover .icon-label,.open-link:focus-visible .icon-label{opacity:1}
-.page-turn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:56px;border:0;border-radius:6px;background:#3b3f43e8;color:white;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;cursor:pointer;z-index:2}
-.page-turn svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.page-turn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:50%;background:#231f20;color:white;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;cursor:pointer;z-index:2}
+.page-turn svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 #pdf-prev{left:10px}#pdf-next{right:10px}
 .pdf-page[data-nav-side="prev"] #pdf-prev:not(:disabled),.pdf-page[data-nav-side="next"] #pdf-next:not(:disabled),.page-turn:focus-visible{opacity:1;pointer-events:auto}
 .page-turn:disabled{visibility:hidden}
@@ -78,7 +78,7 @@ header{padding-bottom:16px}
 <div class="preview paper pdf-page" id="pdf-page" role="group" aria-label="Manuscript PDF preview">
 <canvas id="pdf-canvas" role="img" aria-label="Manuscript page"><p>Read the manuscript using the open PDF icon above.</p></canvas>
 <p id="pdf-message" role="status">Loading manuscript…</p>
-<button class="page-turn" id="pdf-prev" type="button" disabled aria-label="Previous manuscript page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button class="page-turn" id="pdf-next" type="button" disabled aria-label="Next manuscript page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+<button class="page-turn" id="pdf-prev" type="button" disabled aria-label="Previous manuscript page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4l-8 8 8 8"/></svg></button><button class="page-turn" id="pdf-next" type="button" disabled aria-label="Next manuscript page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg></button>
 </div>
 <div class="pdf-controls"><span id="pdf-counter" role="status" aria-live="polite">Loading…</span></div>
 </figure>
