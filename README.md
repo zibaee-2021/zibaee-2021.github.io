@@ -1,4 +1,4 @@
-# simple algorithms and thoughts
+# simple ideas, algorithms & experiments
 
 Public site: https://zibaee-2021.github.io/
 
@@ -36,3 +36,7 @@ The author name reveals contact and donation actions on hover, click/tap, or key
 Never place a recipient email, secret API key, bank details or private receipts in this public repository. Messaging and each checkout remain unavailable until configured. Automated counter updates would require a trusted server-side process and evidence of charity transfers, not just Stripe payment events.
 
 The current public PDF has had its email address redacted. The email can be restored in a future PDF export when the author is ready for publication. Update the PDF URL version in `index.html` and `gallery.js` when replacing it to refresh cached previews. Older Git history contains the original PDF.
+
+## Typography
+
+The gallery and donation page use locally hosted Reenie Beanie, with its SIL Open Font License in `fonts/reenie-beanie/OFL.txt`. Shared rules are in `typography.css`. The embedded SALSA application and manuscript retain their own typography.

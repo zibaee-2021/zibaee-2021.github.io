@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Reenie Beanie';
+  src: url('./fonts/reenie-beanie/ReenieBeanie.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+body, h1, h2, .chalk, .support-summary strong {
+  font-family: 'Reenie Beanie', cursive;
+  font-weight: 400;
+}
+body { font-size: 26px; line-height: 1.25; }
+h1 { font-size: clamp(36px, 4.4vw, 52px); line-height: 1.05; }
+.author { flex-shrink: 0; }
+.author, .open-link, footer, .pdf-controls,
+.contact-form label, .contact-form p, #pdf-message,
+.support-summary p { font-size: 24px; }
+.author-actions { font-size: 22px; }
+.dialog-heading h2 { font-size: 34px; }
+.support-summary strong { font-size: 36px; }
+button, input, textarea { font-family: inherit; }
+footer em { font-style: italic; }
+@media (max-width: 650px) {
+  h1 { font-size: 40px; }
+  .author, .open-link, footer, .pdf-controls { font-size: 24px; }
+}
