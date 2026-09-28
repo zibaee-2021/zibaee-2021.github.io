@@ -6,12 +6,27 @@
 <title>Donate — SALSA et al.</title>
 <style>
 :root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f3f2ed;color:#252a29;font:16px/1.7 Arial,Helvetica,sans-serif}main{max-width:600px;margin:70px auto;padding:0 24px}h1{font:normal 36px/1.2 Georgia,serif;margin-top:45px}a{color:#325c72;text-underline-offset:4px}a:focus-visible{outline:3px solid #325c72;outline-offset:4px}.notice{padding:22px;background:#fffefa;border:1px solid #d8d9d1;border-radius:6px}
+
+.support-summary{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0}.support-summary>div{padding:20px;background:#fffefa;border:1px solid #d8d9d1;border-radius:6px}.support-summary strong{display:block;font:normal 28px/1.3 Georgia,serif;margin-bottom:8px}.support-summary p{font-size:13px;color:#626660;margin:8px 0 0}.amounts{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}.amounts a{padding:10px 18px;border:1px solid #325c72;border-radius:4px;text-decoration:none}.amounts a[aria-disabled=true]{opacity:.5;cursor:default}.notice p:first-child{margin-top:0}.notice p:last-child{margin-bottom:0}@media(max-width:450px){.support-summary{grid-template-columns:1fr}main{margin-top:32px}}
 </style>
 </head>
 <body><main>
 <a href="./">← SALSA et al.</a>
 <h1>donate</h1>
 <p>Support this work and Alzheimer’s Research UK.</p>
-<div class="notice"><p>Payments are not available yet.</p><p>The planned contribution to Alzheimer’s Research UK is 25% of each payment. Payment options and how this contribution is made will be published here before donations open.</p></div>
-</main></body>
+<div class="support-summary">
+<div><strong data-charity-percent>50%</strong>of each payment for Alzheimer’s Research UK</div>
+<div><strong data-charity-total>Awaiting confirmation</strong>donated to the charity so far<p data-charity-date>Only completed donations to the charity count towards this total.</p></div>
+</div>
+<p>Shahin will donate 50% of each payment, calculated before payment-processing fees, to Alzheimer’s Research UK. The remaining share supports this work and covers payment-processing fees.</p>
+<p>The charity contribution is transferred separately; Stripe checkout does not automatically split your payment. This counter is updated after donations to the charity are confirmed.</p>
+<div class="amounts" aria-label="Payment amount in pounds sterling">
+<a data-payment="5" aria-disabled="true" tabindex="-1">£5</a>
+<a data-payment="10" aria-disabled="true" tabindex="-1">£10</a>
+<a data-payment="25" aria-disabled="true" tabindex="-1">£25</a>
+<a data-payment="50" aria-disabled="true" tabindex="-1">£50</a>
+<a data-payment="custom" aria-disabled="true" tabindex="-1">Choose an amount</a>
+</div>
+<div class="notice"><p id="payment-status">Payments are not available yet. Stripe checkout is being set up.</p></div>
+</main><script type="module" src="support.js"></script></body>
 </html>

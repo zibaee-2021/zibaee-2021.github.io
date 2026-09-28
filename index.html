@@ -24,9 +24,10 @@ figure:hover .preview{transform:none}
 .panel-caption{justify-content:flex-end}
 .author{position:relative;font-size:14px}
 .author-name{font:inherit;color:var(--muted);border:0;background:none;padding:10px 0;cursor:pointer}
-.author-actions{position:absolute;right:0;top:100%;display:flex;white-space:nowrap;background:var(--paper);border:1px solid #c7cbc3;border-radius:6px;box-shadow:0 8px 20px #252a2918;z-index:5;overflow:hidden}
+.author-actions{max-width:calc(100vw - 40px);width:max-content;position:absolute;right:0;top:100%;display:flex;white-space:normal;background:var(--paper);border:1px solid #c7cbc3;border-radius:6px;box-shadow:0 8px 20px #252a2918;z-index:5;overflow:hidden}
 .author-actions[hidden]{display:none}
-.author-actions button,.author-actions a{font:inherit;color:var(--ink);background:none;border:0;padding:13px 16px;text-decoration:none;cursor:pointer}
+.author-actions button,.author-actions a{min-width:0;flex:1;font:inherit;color:var(--ink);background:none;border:0;padding:13px 16px;text-decoration:none;cursor:pointer}
+.charity-mini{display:block;font-size:11px;color:var(--muted);margin-top:3px}
 .author-actions a{border-left:1px solid #c7cbc3}
 .author-actions button:hover,.author-actions a:hover{background:#e8ece5}
 .author-actions :focus-visible{outline:2px solid var(--accent);outline-offset:-4px}
@@ -50,7 +51,7 @@ dialog::backdrop{background:#18252066}
 <div class="author">
 <button class="author-name" id="author-toggle" aria-expanded="false" aria-controls="author-actions">Shahin Zibaee</button>
 <div class="author-actions" id="author-actions" hidden>
-<button type="button" id="contact-open">send me a message</button><a href="donate.html">donate</a>
+<button type="button" id="contact-open">send me a message</button><a href="donate.html">donate<span class="charity-mini">to charity: <span data-charity-total>Awaiting confirmation</span></span></a>
 </div>
 </div></header>
 <main aria-label="Projects"><div class="gallery">
@@ -87,5 +88,6 @@ dialog::backdrop{background:#18252066}
 </form>
 </dialog>
 <script type="module" src="contact.js"></script>
+<script type="module" src="support.js"></script>
 <script type="module" src="gallery.js"></script>
 </body></html>

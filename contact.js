@@ -1,5 +1,6 @@
-// Use a public form-service endpoint, never a recipient email or secret key.
-const contactEndpoint = '';
+import { support } from './support-config.js';
+// Formspree's public endpoint identifies the form without exposing its recipient.
+const contactEndpoint = /^https:\/\/formspree\.io\/f\/[a-zA-Z0-9]+$/.test(support.formspreeEndpoint) ? support.formspreeEndpoint : '';
 const author = document.querySelector('.author');
 const toggle = document.getElementById('author-toggle');
 const actions = document.getElementById('author-actions');

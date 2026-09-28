@@ -26,8 +26,13 @@ This local checkout tracks `origin/main`. Stage the intended files, commit, and 
 
 ## Contact and donations
 
-The author name reveals contact and donation actions on hover, click/tap, or keyboard. The message dialog is implemented, but sending stays disabled until an approved public form-service endpoint is configured in `contact.js`. Never place a recipient email, secret API key, or payment credentials in this public repository.
+The author name reveals contact and donation actions on hover, click/tap, or keyboard. Configure public connections in `support-config.js`:
 
-`donate.html` currently explains that payments are unavailable. A payment provider, currency, available amounts, and a confirmed process for the 25% contribution to Alzheimer's Research UK are needed before enabling checkout. No payments are collected by this placeholder.
+1. Create a Formspree form, verify its recipient email privately in Formspree, and copy its `https://formspree.io/f/...` endpoint to `formspreeEndpoint`.
+2. Complete Stripe account onboarding. Create GBP Payment Links for £5, £10, £25, £50 and a customer-chosen amount. Put their public `https://buy.stripe.com/...` URLs in `stripeLinks`. Test checkout using Stripe test mode before publishing live links.
+3. The charity allocation is 50% of the gross payment before fees. Contributions are transferred separately; Payment Links do not automatically send half to the charity.
+4. After verifying charity receipts, update `confirmedDonatedMinor` with the cumulative amount actually donated in pence, and `confirmedAsOf` with YYYY-MM-DD. For example, £50 is 5000. Null displays an unconfirmed state, not a fabricated zero. Commit and push to update both counters. Do not count checkout clicks or browser success redirects as donations.
 
-The current public PDF has had its email address redacted. Future PDF replacements should omit that address too. Update the PDF URL version in `index.html` and `gallery.js` when replacing it to refresh cached previews. Older Git history contains the original PDF.
+Never place a recipient email, secret API key, bank details or private receipts in this public repository. Messaging and each checkout remain unavailable until configured. Automated counter updates would require a trusted server-side process and evidence of charity transfers, not just Stripe payment events.
+
+The current public PDF has had its email address redacted. The email can be restored in a future PDF export when the author is ready for publication. Update the PDF URL version in `index.html` and `gallery.js` when replacing it to refresh cached previews. Older Git history contains the original PDF.
