@@ -1,4 +1,4 @@
-# SALSA et al.
+# simple algorithms and thoughts
 
 Public site: https://zibaee-2021.github.io/
 
@@ -31,7 +31,7 @@ The author name reveals contact and donation actions on hover, click/tap, or key
 1. Create a Formspree form, verify its recipient email privately in Formspree, and copy its `https://formspree.io/f/...` endpoint to `formspreeEndpoint`.
 2. Complete Stripe account onboarding. Create GBP Payment Links for £5, £10, £25, £50 and a customer-chosen amount. Put their public `https://buy.stripe.com/...` URLs in `stripeLinks`. Test checkout using Stripe test mode before publishing live links.
 3. The charity allocation is 50% of the gross payment before fees. Contributions are transferred separately; Payment Links do not automatically send half to the charity.
-4. After verifying charity receipts, update `confirmedDonatedMinor` with the cumulative amount actually donated in pence, and `confirmedAsOf` with YYYY-MM-DD. For example, £50 is 5000. Null displays an unconfirmed state, not a fabricated zero. Commit and push to update both counters. Do not count checkout clicks or browser success redirects as donations.
+4. After verifying charity receipts, update `confirmedDonatedMinor` with the cumulative amount actually donated in pence, and `confirmedAsOf` with YYYY-MM-DD. For example, £50 is 5000. Null displays an unconfirmed state, not a fabricated zero. Commit and push to update the donation-page counter. Do not count checkout clicks or browser success redirects as donations.
 
 Never place a recipient email, secret API key, bank details or private receipts in this public repository. Messaging and each checkout remain unavailable until configured. Automated counter updates would require a trusted server-side process and evidence of charity transfers, not just Stripe payment events.
 
