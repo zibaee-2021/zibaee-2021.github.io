@@ -1,4 +1,4 @@
-# Research gallery
+# SALSA et al.
 
 Public site: https://zibaee-2021.github.io/
 
@@ -23,3 +23,9 @@ Run `python3 -m http.server 8765 --bind 127.0.0.1` and open http://127.0.0.1:876
 ## Publication
 
 This local checkout tracks `origin/main`. Stage the intended files, commit, and push. GitHub Pages publishes from main / (root). `.DS_Store`, the obsolete local `salsa-preview.jpg`, and node_modules are ignored.
+
+## Contact and donations
+
+The author name reveals contact and donation actions on hover, click/tap, or keyboard. The message dialog is implemented, but sending stays disabled until an approved public form-service endpoint is configured in `contact.js`. Never place a recipient email, secret API key, or payment credentials in this public repository.
+
+`donate.html` currently explains that payments are unavailable. A payment provider, currency, available amounts, and a confirmed process for the 25% contribution to Alzheimer's Research UK are needed before enabling checkout. No payments are collected by this placeholder.
