@@ -58,6 +58,7 @@ header{padding-bottom:16px}
 .gallery-background{background:#e6e5e0}
 </style>
 <link rel="stylesheet" href="typography.css">
+<link rel="stylesheet" href="navigation.css">
 </head>
 <body>
 <header><h1>simple ideas, algorithms &amp; experiments</h1>
@@ -68,14 +69,22 @@ header{padding-bottom:16px}
 </div>
 </div></header>
 <div class="gallery-background">
+<details class="page-index" id="page-index" open>
+<summary>index <span aria-hidden="true">⌄</span></summary>
+<nav aria-label="Page index" id="index-links">
+<div class="index-group"><h2>Apps</h2><a href="#salsa-app">SALSA</a></div>
+<div class="index-group"><h2>Manuscripts</h2><a href="#salsa-manuscript">SALSA web app</a></div>
+<div class="index-group"><h2>Ideas</h2><a href="#ideas">Brainstorming</a></div>
+</nav>
+</details>
 <main aria-label="Projects"><div class="gallery">
-<figure>
+<figure id="salsa-app" tabindex="-1" aria-label="SALSA application" data-index-group="Apps" data-index-label="SALSA">
 <figcaption class="panel-caption"><a class="open-link" href="https://salsa-maru.onrender.com/" target="_blank" rel="noopener" aria-label="open app"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01M10 12l5 2.5-5 2.5z"/></svg><span class="icon-label">open app</span></a></figcaption>
 <div class="preview app live-app" id="salsa-preview">
 <iframe id="salsa-frame" src="https://salsa-maru.onrender.com/" title="SALSA interactive sequence analysis application" width="840" height="1188" loading="eager"></iframe>
 </div>
 </figure>
-<figure>
+<figure id="salsa-manuscript" tabindex="-1" aria-label="SALSA web app manuscript" data-index-group="Manuscripts" data-index-label="SALSA web app">
 <figcaption class="panel-caption"><a class="open-link" href="manuscripts/SALSA_WebApp.pdf?v=e2b81161bb" target="_blank" rel="noopener" aria-label="open PDF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h6"/></svg><span class="icon-label">open PDF</span></a></figcaption>
 <div class="preview paper pdf-page" id="pdf-page" role="group" aria-label="Manuscript PDF preview">
 <canvas id="pdf-canvas" role="img" aria-label="Manuscript page"><p>Read the manuscript using the open PDF icon above.</p></canvas>
@@ -84,7 +93,7 @@ header{padding-bottom:16px}
 </div>
 <div class="pdf-controls"><span id="pdf-counter" role="status" aria-live="polite">Loading…</span></div>
 </figure>
-<figure class="ideas">
+<figure class="ideas" id="ideas" tabindex="-1" aria-label="Ideas and brainstorming" data-index-group="Ideas" data-index-label="Brainstorming">
 <div class="preview board" role="img" aria-label="Wide ideas blackboard: white chalk on a blackboard connects a question to an experiment and a new idea."><svg viewBox="0 0 594 420" aria-hidden="true"><text x="42" y="67" class="chalk" font-size="29">What if…</text><path d="M44 78Q102 83 151 77"></path><text x="64" y="167" class="chalk" font-size="23">a question</text><ellipse cx="121" cy="160" rx="91" ry="40"></ellipse><path d="M215 160Q250 142 280 158M268 146L283 158L269 167"></path><text x="300" y="167" class="chalk" font-size="23">an experiment</text><path d="M293 182Q378 187 464 180M392 204Q398 250 342 272M347 257L340 274L356 273"></path><text x="207" y="310" class="chalk" font-size="28">a new idea?</text><path d="M199 322Q281 329 368 320M180 292Q84 277 110 215M98 225L110 211L118 228"></path><text x="389" y="368" class="chalk" font-size="18" transform="rotate(-5 389 368)">keep exploring.</text></svg></div>
 
 </figure>
@@ -106,4 +115,5 @@ header{padding-bottom:16px}
 <script type="module" src="contact.js"></script>
 <script type="module" src="support.js"></script>
 <script type="module" src="gallery.js"></script>
+<script type="module" src="navigation.js"></script>
 </body></html>

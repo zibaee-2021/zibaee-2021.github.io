@@ -40,3 +40,9 @@ The current public PDF has had its email address redacted. The email can be rest
 ## Typography
 
 The gallery and donation page use locally hosted Reenie Beanie, with its SIL Open Font License in `fonts/reenie-beanie/OFL.txt`. Shared rules are in `typography.css`. The embedded SALSA application and manuscript retain their own typography.
+
+## One-page index
+
+The fixed left-hand index groups Apps, Manuscripts and Ideas. At widths below 1200px it becomes a sticky expandable menu. Links use native URL fragments, smooth scrolling (unless reduced motion is preferred), keyboard focus and active-section highlighting.
+
+To add an entry, append its figure/section inside `.gallery`, give it a unique `id`, `tabindex="-1"`, a descriptive `aria-label`, `data-index-group="Manuscripts"` (or Apps/Ideas), and `data-index-label="Your title"`. `navigation.js` discovers entries automatically. Update the static fallback links in `index.html` too. Sections can link to each other using these IDs, allowing several manuscripts to refer to one app without duplicating the app. Additional live PDF viewers will need their own viewer instances; do not duplicate the existing PDF control IDs.
