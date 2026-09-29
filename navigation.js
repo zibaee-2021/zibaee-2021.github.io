@@ -6,22 +6,33 @@ const compact = matchMedia('(max-width: 1199px)');
 // New gallery entries automatically join the appropriate index group.
 const groups = new Map();
 nav.replaceChildren();
+for (const name of ['Apps', 'Experiments', 'Manuscripts']) {
+  const group = document.createElement('div');
+  group.className = 'index-group';
+  const heading = document.createElement('h2');
+  heading.textContent = name;
+  group.append(heading);
+  nav.append(group);
+  const entries = document.createElement('div');
+  if (name === 'Experiments') entries.className = 'index-subsections';
+  group.append(entries);
+  groups.set(name, entries);
+}
 for (const section of sections) {
-  const name = section.dataset.indexGroup;
-  if (!groups.has(name)) {
-    const group = document.createElement('div');
-    group.className = 'index-group';
-    const heading = document.createElement('h2');
-    heading.textContent = name;
-    group.append(heading);
-    nav.append(group);
-    groups.set(name, group);
-  }
+  const group = groups.get(section.dataset.indexGroup);
+  if (!group) continue;
   const link = document.createElement('a');
   link.href = `#${section.id}`;
   link.textContent = section.dataset.indexLabel;
-  groups.get(name).append(link);
+  group.append(link);
 }
+// Computational experiments currently use the shared SALSA application.
+const computational = document.createElement('a');
+computational.href = '#salsa-app';
+const italic = document.createElement('em');
+italic.textContent = 'in silico';
+computational.append(italic);
+groups.get('Experiments').append(computational);
 const links = [...nav.querySelectorAll('a')];
 let active = '';
 let pendingTarget = '';
