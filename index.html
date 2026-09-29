@@ -60,8 +60,8 @@ header{padding-bottom:16px}
 .back-to-top:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 </style>
 <link rel="stylesheet" href="typography.css">
-<link rel="stylesheet" href="navigation.css">
-<link rel="stylesheet" href="art-preview.css">
+<link rel="stylesheet" href="navigation.css?v=triangles-2">
+<link rel="stylesheet" href="art-preview.css?v=credit-1">
 </head>
 <body>
 <header id="top"><h1>simple algorithms &amp; experiments</h1>
@@ -72,13 +72,15 @@ header{padding-bottom:16px}
 </div>
 </div></header>
 <div class="gallery-background">
+<p class="artwork-credit">Mark Rothko 1968. (Permission to reproduce here is pending...)</p>
 <details class="page-index" id="page-index" open>
-<summary>index <span aria-hidden="true">⌄</span></summary>
-<nav aria-label="Page index" id="index-links">
-<div class="index-group"><h2>Apps</h2><a href="#salsa-app">SALSA</a></div>
-<div class="index-group"><h2>Experiments</h2><div class="index-subsections"><a href="#ideas">thought</a><a href="#salsa-app"><em>in silico</em></a></div></div>
-<div class="index-group"><h2>Manuscripts</h2><a href="#salsa-manuscript">SALSA web app</a></div>
-</nav>
+<summary>CONTENTS <span aria-hidden="true">⌄</span></summary>
+<p class="contents-heading">CONTENTS</p>
+<nav aria-label="Page contents" id="index-links"><ul class="contents-list">
+<li><details class="contents-section"><summary>SALSA web app</summary><ul><li><a href="#salsa-app">web app</a></li><li><details class="contents-section"><summary>experiments</summary><ul><li><a href="#ideas">thought</a></li><li><a href="#salsa-app">in silico</a></li></ul></details></li><li><a href="#salsa-manuscript">manuscript</a></li></ul></details></li>
+<li><details class="contents-section"><summary>SALSA helical amphipathicity</summary><ul><li><span class="index-pending" aria-disabled="true">web app</span></li><li><details class="contents-section"><summary>experiments</summary><ul><li><span class="index-pending" aria-disabled="true">thought</span></li><li><span class="index-pending" aria-disabled="true">in silico</span></li></ul></details></li><li><span class="index-pending" aria-disabled="true">manuscript</span></li></ul></details></li>
+<li><details class="contents-section"><summary>Amyloid lag-time estimator</summary><ul><li><span class="index-pending" aria-disabled="true">web app</span></li><li><details class="contents-section"><summary>experiments</summary><ul><li><span class="index-pending" aria-disabled="true">thought</span></li><li><span class="index-pending" aria-disabled="true">in silico</span></li></ul></details></li><li><span class="index-pending" aria-disabled="true">manuscript</span></li></ul></details></li>
+</ul></nav>
 </details>
 <main aria-label="Projects"><div class="gallery">
 <figure id="salsa-app" tabindex="-1" aria-label="SALSA application" data-index-group="Apps" data-index-label="SALSA">
@@ -97,12 +99,12 @@ header{padding-bottom:16px}
 <div class="pdf-controls"><span id="pdf-counter" role="status" aria-live="polite">Loading…</span></div>
 </figure>
 <figure class="ideas" id="ideas" tabindex="-1" aria-label="Ideas and brainstorming" data-index-group="Experiments" data-index-label="thought">
-<div class="preview board" role="img" aria-label="Wide ideas blackboard: white chalk on a blackboard connects a question to an experiment and a new idea."><svg viewBox="0 0 594 420" aria-hidden="true"><text x="42" y="67" class="chalk" font-size="29">What if…</text><path d="M44 78Q102 83 151 77"></path><text x="64" y="167" class="chalk" font-size="23">a question</text><ellipse cx="121" cy="160" rx="91" ry="40"></ellipse><path d="M215 160Q250 142 280 158M268 146L283 158L269 167"></path><text x="300" y="167" class="chalk" font-size="23">an experiment</text><path d="M293 182Q378 187 464 180M392 204Q398 250 342 272M347 257L340 274L356 273"></path><text x="207" y="310" class="chalk" font-size="28">a new idea?</text><path d="M199 322Q281 329 368 320M180 292Q84 277 110 215M98 225L110 211L118 228"></path><text x="389" y="368" class="chalk" font-size="18" transform="rotate(-5 389 368)">keep exploring.</text></svg></div>
+<div class="preview board" role="img" aria-label="Thought experiments on squared notebook paper: white handwriting connects a question to an experiment and a new idea."><svg viewBox="0 0 594 420" aria-hidden="true"><text x="42" y="67" class="chalk" font-size="29">What if…</text><path d="M44 78Q102 83 151 77"></path><text x="64" y="167" class="chalk" font-size="23">a question</text><ellipse cx="121" cy="160" rx="91" ry="40"></ellipse><path d="M215 160Q250 142 280 158M268 146L283 158L269 167"></path><text x="300" y="167" class="chalk" font-size="23">an experiment</text><path d="M293 182Q378 187 464 180M392 204Q398 250 342 272M347 257L340 274L356 273"></path><text x="207" y="310" class="chalk" font-size="28">a new idea?</text><path d="M199 322Q281 329 368 320M180 292Q84 277 110 215M98 225L110 211L118 228"></path><text x="389" y="368" class="chalk" font-size="18" transform="rotate(-5 389 368)">keep exploring.</text></svg></div>
 
 </figure>
 </div></main>
 </div>
-<footer><p>Apps · Experiments · Manuscripts</p><a class="back-to-top" href="#top">top</a></footer>
+<footer><a class="back-to-top" href="#top">top</a><p>apps · experiments · manuscripts</p></footer>
 
 
 
@@ -118,5 +120,5 @@ header{padding-bottom:16px}
 <script type="module" src="contact.js"></script>
 <script type="module" src="support.js"></script>
 <script type="module" src="gallery.js"></script>
-<script type="module" src="navigation.js?v=334584a"></script>
+<script type="module" src="navigation.js?v=paper-2"></script>
 </body></html>

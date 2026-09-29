@@ -3,43 +3,26 @@ const nav = document.getElementById('index-links');
 const sections = [...document.querySelectorAll('[data-index-group][data-index-label][id]')];
 const compact = matchMedia('(max-width: 1199px)');
 
-// New gallery entries automatically join the appropriate index group.
-const groups = new Map();
-nav.replaceChildren();
-for (const name of ['Apps', 'Experiments', 'Manuscripts']) {
-  const group = document.createElement('div');
-  group.className = 'index-group';
-  const heading = document.createElement('h2');
-  heading.textContent = name;
-  group.append(heading);
-  nav.append(group);
-  const entries = document.createElement('div');
-  if (name === 'Experiments') entries.className = 'index-subsections';
-  group.append(entries);
-  groups.set(name, entries);
-}
-for (const section of sections) {
-  const group = groups.get(section.dataset.indexGroup);
-  if (!group) continue;
-  const link = document.createElement('a');
-  link.href = `#${section.id}`;
-  link.textContent = section.dataset.indexLabel;
-  group.append(link);
-}
-// Computational experiments currently use the shared SALSA application.
-const computational = document.createElement('a');
-computational.href = '#salsa-app';
-const italic = document.createElement('em');
-italic.textContent = 'in silico';
-computational.append(italic);
-groups.get('Experiments').append(computational);
 const links = [...nav.querySelectorAll('a')];
 let active = '';
 let pendingTarget = '';
 let scrollTimer;
+let highlightTarget = '';
+function highlight(id) {
+  const preview = document.getElementById(id)?.querySelector('.preview');
+  if (!preview) return;
+  preview.classList.remove('index-highlight');
+  void preview.offsetWidth;
+  preview.classList.add('index-highlight');
+  preview.addEventListener('animationend', () => preview.classList.remove('index-highlight'), { once: true });
+}
 function settleScroll() {
   clearTimeout(scrollTimer);
-  scrollTimer = setTimeout(() => { pendingTarget = ''; scheduleUpdate(); }, 180);
+  scrollTimer = setTimeout(() => {
+    if (highlightTarget) { highlight(highlightTarget); highlightTarget = ''; }
+    pendingTarget = '';
+    scheduleUpdate();
+  }, 180);
 }
 function select(id) {
   active = id;
@@ -55,6 +38,7 @@ nav.addEventListener('click', event => {
   const link = event.target.closest('a');
   if (!link || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
   pendingTarget = link.hash.slice(1);
+  highlightTarget = pendingTarget;
   select(pendingTarget);
   settleScroll();
   if (compact.matches) menu.open = false;
@@ -97,3 +81,25 @@ window.addEventListener('scroll', () => {
 window.addEventListener('resize', scheduleUpdate);
 window.addEventListener('load', scheduleUpdate);
 update();
+
+// Reinforce the paper margin only beside the first-level subsection labels.
+function updateMarginSegments() {
+  menu.querySelectorAll('.margin-segment').forEach(segment => segment.remove());
+  if (!menu.open) return;
+  const origin = menu.getBoundingClientRect();
+  const rows = nav.querySelectorAll('.contents-list > li > details > ul > li > a, .contents-list > li > details > ul > li > .index-pending, .contents-list > li > details > ul > li > details > summary');
+  for (const row of rows) {
+    if (!row.checkVisibility()) continue;
+    const rect = row.getBoundingClientRect();
+    const segment = document.createElement('span');
+    segment.className = 'margin-segment';
+    segment.setAttribute('aria-hidden', 'true');
+    segment.style.top = `${rect.top - origin.top + menu.scrollTop}px`;
+    segment.style.height = `${rect.height}px`;
+    menu.append(segment);
+  }
+}
+menu.addEventListener('toggle', updateMarginSegments, true);
+window.addEventListener('resize', updateMarginSegments);
+document.fonts.ready.then(updateMarginSegments);
+updateMarginSegments();
