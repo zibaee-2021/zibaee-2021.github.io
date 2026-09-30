@@ -55,7 +55,7 @@ let resizeTimer;
 new ResizeObserver(() => { clearTimeout(resizeTimer); resizeTimer = setTimeout(renderPage, 150); }).observe(panel);
 try {
   pdf = await getDocument({
-    url: new URL('./manuscripts/SALSA_WebApp.pdf?v=e2b81161bb', import.meta.url).href,
+    url: new URL('./manuscripts/SALSA_WebApp.pdf?v=4f596d911e33', import.meta.url).href,
     cMapUrl: new URL('./vendor/pdfjs/cmaps/', import.meta.url).href,
     cMapPacked: true,
     standardFontDataUrl: new URL('./vendor/pdfjs/standard_fonts/', import.meta.url).href,
