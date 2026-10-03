@@ -10,7 +10,7 @@ header .author {
 }
 .author-actions { left: 0; right: auto; }
 .gallery-background {
-  background: #0c2020 url('./assets/rothko-1968-preview.png') center center / cover no-repeat;
+  background: #171717 url('./assets/alejandro-guijarro-oxford-ii-2011.png') center center / cover no-repeat;
   background-attachment: fixed;
 }
 .gallery .open-link, .gallery .pdf-controls { color: #f3f2ed; }
