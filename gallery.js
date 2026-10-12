@@ -1,15 +1,19 @@
 import { getDocument, GlobalWorkerOptions } from './vendor/pdfjs/pdf.min.mjs';
 GlobalWorkerOptions.workerSrc = new URL('./vendor/pdfjs/pdf.worker.min.mjs', import.meta.url).href;
 
-const frame = document.getElementById('salsa-frame');
-const appPanel = document.getElementById('salsa-preview');
-function fitApp() {
-  const scale = appPanel.clientWidth / 840;
-  frame.style.transform = `scale(${scale})`;
-  frame.style.height = `${appPanel.clientHeight / scale}px`;
+// Scale each live application independently to its A4 preview panel.
+for (const appPanel of document.querySelectorAll('.live-app')) {
+  const frame = appPanel.querySelector('iframe');
+  const naturalWidth = Number(frame.getAttribute('width')) || 840;
+  function fitApp() {
+    const scale = appPanel.clientWidth / naturalWidth;
+    if (!scale) return;
+    frame.style.transform = `scale(${scale})`;
+    frame.style.height = `${appPanel.clientHeight / scale}px`;
+  }
+  new ResizeObserver(fitApp).observe(appPanel);
+  fitApp();
 }
-new ResizeObserver(fitApp).observe(appPanel);
-fitApp();
 
 const canvas = document.getElementById('pdf-canvas');
 const panel = document.getElementById('pdf-page');

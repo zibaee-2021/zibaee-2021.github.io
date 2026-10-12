@@ -58,6 +58,8 @@ header{padding-bottom:16px}
 .gallery-background{background:#e6e5e0}
 .back-to-top{color:inherit;text-decoration:none}
 .back-to-top:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.manuscript-caption{height:36px}
+.manuscript-placeholder .paperhead{margin:0}
 </style>
 <link rel="stylesheet" href="typography.css">
 <link rel="stylesheet" href="navigation.css?v=triangles-2">
@@ -78,6 +80,7 @@ header{padding-bottom:16px}
 <p class="contents-heading">CONTENTS</p>
 <nav aria-label="Page contents" id="index-links"><ul class="contents-list">
 <li><details class="contents-section"><summary>SALSA web app</summary><ul><li><a href="#salsa-app">web app</a></li><li><details class="contents-section"><summary>experiments</summary><ul><li><a href="#ideas">thought</a></li><li><a href="#salsa-app">in silico</a></li></ul></details></li><li><a href="#salsa-manuscript">manuscript</a></li></ul></details></li>
+<li><details class="contents-section"><summary>ADA web app</summary><ul><li><a href="#ada-app">web app</a></li><li><a href="#ada-manuscript">manuscript</a></li></ul></details></li>
 <li><details class="contents-section"><summary>SALSA helical amphipathicity</summary><ul><li><span class="index-pending" aria-disabled="true">web app</span></li><li><details class="contents-section"><summary>experiments</summary><ul><li><span class="index-pending" aria-disabled="true">thought</span></li><li><span class="index-pending" aria-disabled="true">in silico</span></li></ul></details></li><li><span class="index-pending" aria-disabled="true">manuscript</span></li></ul></details></li>
 <li><details class="contents-section"><summary>Amyloid lag-time estimator</summary><ul><li><span class="index-pending" aria-disabled="true">web app</span></li><li><details class="contents-section"><summary>experiments</summary><ul><li><span class="index-pending" aria-disabled="true">thought</span></li><li><span class="index-pending" aria-disabled="true">in silico</span></li></ul></details></li><li><span class="index-pending" aria-disabled="true">manuscript</span></li></ul></details></li>
 </ul></nav>
@@ -97,6 +100,22 @@ header{padding-bottom:16px}
 <button class="page-turn" id="pdf-prev" type="button" disabled aria-label="Previous manuscript page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4l-8 8 8 8"/></svg></button><button class="page-turn" id="pdf-next" type="button" disabled aria-label="Next manuscript page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg></button>
 </div>
 <div class="pdf-controls"><span id="pdf-counter" role="status" aria-live="polite">Loading…</span></div>
+</figure>
+<figure id="ada-app" tabindex="-1" aria-label="ADA application" data-index-group="Apps" data-index-label="ADA">
+<figcaption class="panel-caption"><a class="open-link" href="https://ada-khcz.onrender.com/" target="_blank" rel="noopener" aria-label="open app"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01M10 12l5 2.5-5 2.5z"/></svg><span class="icon-label">open app</span></a></figcaption>
+<div class="preview app live-app" id="ada-preview">
+<iframe id="ada-frame" src="https://ada-khcz.onrender.com/" title="ADA web application" width="840" height="1188" loading="lazy"></iframe>
+</div>
+</figure>
+<figure id="ada-manuscript" tabindex="-1" aria-label="ADA manuscript placeholder" data-index-group="Manuscripts" data-index-label="ADA manuscript">
+<figcaption class="panel-caption manuscript-caption" aria-hidden="true"></figcaption>
+<div class="preview paper manuscript-placeholder">
+<p class="paperhead">MANUSCRIPT · FORTHCOMING</p>
+<h3>ADA</h3>
+<p class="byline">Manuscript coming soon</p>
+<div class="rule" aria-hidden="true"></div>
+<div class="lines" aria-hidden="true"></div>
+</div>
 </figure>
 <figure class="ideas" id="ideas" tabindex="-1" aria-label="Ideas and brainstorming" data-index-group="Experiments" data-index-label="thought">
 <div class="preview board" role="img" aria-label="Thought experiments on squared notebook paper: white handwriting connects a question to an experiment and a new idea."><svg viewBox="0 0 594 420" aria-hidden="true"><text x="42" y="67" class="chalk" font-size="29">What if…</text><path d="M44 78Q102 83 151 77"></path><text x="64" y="167" class="chalk" font-size="23">a question</text><ellipse cx="121" cy="160" rx="91" ry="40"></ellipse><path d="M215 160Q250 142 280 158M268 146L283 158L269 167"></path><text x="300" y="167" class="chalk" font-size="23">an experiment</text><path d="M293 182Q378 187 464 180M392 204Q398 250 342 272M347 257L340 274L356 273"></path><text x="207" y="310" class="chalk" font-size="28">a new idea?</text><path d="M199 322Q281 329 368 320M180 292Q84 277 110 215M98 225L110 211L118 228"></path><text x="389" y="368" class="chalk" font-size="18" transform="rotate(-5 389 368)">keep exploring.</text></svg></div>
@@ -119,6 +138,6 @@ header{padding-bottom:16px}
 </dialog>
 <script type="module" src="contact.js"></script>
 <script type="module" src="support.js"></script>
-<script type="module" src="gallery.js"></script>
+<script type="module" src="gallery.js?v=ada-1"></script>
 <script type="module" src="navigation.js?v=paper-2"></script>
 </body></html>
