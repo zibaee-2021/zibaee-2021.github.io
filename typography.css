@@ -3,7 +3,8 @@
   src: url('./fonts/reenie-beanie/ReenieBeanie.ttf') format('truetype');
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
+  /* Avoid showing a fallback face while the preloaded font arrives. */
+  font-display: block;
 }
 
 body, h1, h2, .chalk, .support-summary strong {
