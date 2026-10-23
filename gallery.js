@@ -15,12 +15,13 @@ for (const appPanel of document.querySelectorAll('.live-app')) {
   fitApp();
 }
 
-const canvas = document.getElementById('pdf-canvas');
-const panel = document.getElementById('pdf-page');
-const message = document.getElementById('pdf-message');
-const counter = document.getElementById('pdf-counter');
-const previous = document.getElementById('pdf-prev');
-const next = document.getElementById('pdf-next');
+async function initialisePDF(figure) {
+const canvas = figure.querySelector('canvas');
+const panel = figure.querySelector('.pdf-page');
+const message = figure.querySelector('.pdf-message');
+const counter = figure.querySelector('.pdf-counter');
+const previous = figure.querySelector('.pdf-prev');
+const next = figure.querySelector('.pdf-next');
 let pdf, pageNumber = 1, rendering = false, queued = false;
 
 async function renderPage() {
@@ -32,6 +33,7 @@ async function renderPage() {
     const page = await pdf.getPage(pageNumber);
     const natural = page.getViewport({ scale: 1 });
     const scale = Math.min(panel.clientWidth / natural.width, panel.clientHeight / natural.height);
+    if (scale <= 0) return;
     const ratio = Math.min(window.devicePixelRatio || 1, 2);
     const viewport = page.getViewport({ scale: scale * ratio });
     canvas.width = Math.floor(viewport.width);
@@ -59,7 +61,7 @@ let resizeTimer;
 new ResizeObserver(() => { clearTimeout(resizeTimer); resizeTimer = setTimeout(renderPage, 150); }).observe(panel);
 try {
   pdf = await getDocument({
-    url: new URL('./manuscripts/SALSA_WebApp.pdf?v=e23a95032de5', import.meta.url).href,
+    url: figure.querySelector('.open-link').href,
     cMapUrl: new URL('./vendor/pdfjs/cmaps/', import.meta.url).href,
     cMapPacked: true,
     standardFontDataUrl: new URL('./vendor/pdfjs/standard_fonts/', import.meta.url).href,
@@ -72,8 +74,9 @@ try {
   console.error('PDF loading failed', error);
 }
 
-panel.addEventListener('pointermove', event => {
-  const bounds = panel.getBoundingClientRect();
-  panel.dataset.navSide = event.clientX < bounds.left + bounds.width / 2 ? 'prev' : 'next';
-});
-panel.addEventListener('pointerleave', () => { delete panel.dataset.navSide; });
+
+
+}
+for (const figure of document.querySelectorAll(".pdf-viewer")) {
+  initialisePDF(figure);
+}
