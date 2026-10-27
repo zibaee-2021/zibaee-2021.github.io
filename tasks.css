@@ -1,0 +1,62 @@
+.project-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: start;
+}
+.todo-panel {
+  position: relative;
+  width: 0;
+  margin-top: 48px;
+  color: #252a29;
+  font-size: 22px;
+}
+.todo-panel > summary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  cursor: pointer;
+  color: #f3f2ed;
+  font-size: 18px;
+  line-height: 1;
+  list-style: none;
+}
+.todo-panel > summary::-webkit-details-marker { display: none; }
+.todo-panel > summary::before { content: '▸'; display: block; }
+.todo-panel[open] > summary::before { content: '▾'; }
+.todo-panel[open] { width: 190px; }
+.todo-panel[open] > summary {
+  position: static;
+  width: auto;
+  color: #252a29;
+  padding: 10px 12px;
+  background: #f2e6bf;
+}
+.todo-panel[open] > summary::before { display: inline; margin-right: 5px; }
+.todo-content { padding: 0 12px 12px; background: #f2e6bf; }
+.todo-content p { margin: 0 0 12px; font-size: 18px; }
+.todo-list { list-style: none; padding: 0; margin: 0 0 12px; }
+.todo-list li { display: flex; align-items: start; gap: 6px; margin: 10px 0; }
+.todo-list label { display: flex; align-items: start; gap: 6px; flex: 1; min-width: 0; }
+.todo-list label span { overflow-wrap: anywhere; }
+.todo-list input { margin: 5px 0 0; }
+.todo-list input:checked + span { text-decoration: line-through; opacity: .6; }
+.todo-content button { font: inherit; cursor: pointer; border: 1px solid #9b926f; background: #fff9e6; color: inherit; border-radius: 3px; }
+.todo-list button { border: 0; background: transparent; padding: 0 2px; }
+.todo-form label { display: block; font-size: 18px; }
+.todo-form input { width: 100%; min-width: 0; font: inherit; background: #fff9e6; border: 1px solid #9b926f; border-radius: 3px; padding: 4px; }
+.todo-form button { margin-top: 6px; }
+@media (max-width: 850px) {
+  .project-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .project-row > figure:nth-of-type(1) { grid-column: 1; grid-row: 1; }
+  .project-row > figure:nth-of-type(2) { grid-column: 2; grid-row: 1; }
+  .todo-panel, .todo-panel[open] { width: 100%; margin-top: 0; grid-row: 2; }
+  .todo-panel > summary { position: static; width: auto; }
+  .todo-panel > summary::before { display: inline; margin-right: 5px; }
+}
+@media (max-width: 650px) {
+  .project-row { grid-template-columns: minmax(0, 1fr); }
+  .project-row > figure:nth-of-type(n), .todo-panel { grid-column: 1; grid-row: auto; }
+}
