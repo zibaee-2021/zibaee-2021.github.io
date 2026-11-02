@@ -1,4 +1,4 @@
-/* The six-pixel strip meets the preview edge below the caption. */
+/* Twelve-pixel strip with a three-pixel gap above the preview. */
 .gallery .panel-caption {
   position: relative;
   min-height: 36px;
@@ -7,9 +7,9 @@
 .completion-segments {
   position: absolute;
   left: 0;
-  bottom: -12px;
+  bottom: -9px;
   width: 100%;
-  height: 6px;
+  height: 12px;
   display: flex;
   align-items: center;
   gap: 0;
@@ -19,7 +19,7 @@
   display: block;
   flex: 1 1 0;
   min-width: 0;
-  height: 6px;
+  height: 12px;
   border-radius: 0;
   background: #e34b59;
   border: 0;
@@ -35,10 +35,10 @@
   position: absolute;
   left: 0;
   /* Align the label with the open-icon caption text. */
-  top: -24px;
+  top: -15px;
   transform: translateY(-50%);
-  font-family: inherit;
-  font-size: 20px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 14px;
   line-height: 1.5;
   color: #f3f2ed;
   white-space: nowrap;
