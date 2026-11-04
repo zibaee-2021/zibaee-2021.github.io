@@ -1,33 +1,47 @@
 @font-face {
-  font-family: 'Reenie Beanie';
-  src: url('./fonts/reenie-beanie/ReenieBeanie.ttf') format('truetype');
+  font-family: 'Source Sans 3';
+  src: url('./fonts/source-sans-3/regular.ttf') format('truetype');
   font-style: normal;
   font-weight: 400;
-  /* Avoid showing a fallback face while the preloaded font arrives. */
   font-display: block;
 }
-
-body, h1, h2, .chalk, .support-summary strong {
-  font-family: 'Reenie Beanie', cursive;
-  font-weight: 400;
+@font-face {
+  font-family: 'Source Sans 3';
+  src: url('./fonts/source-sans-3/semibold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
 }
-body { font-size: 26px; line-height: 1.25; }
-h1 { font-size: clamp(36px, 4.4vw, 52px); line-height: 1.05; }
+@font-face {
+  font-family: 'Source Sans 3';
+  src: url('./fonts/source-sans-3/bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+}
+body, h1, h2, .chalk, .support-summary strong,
+.paperhead, .paper h3, .byline, .sectionname, .page-number {
+  font-family: 'Source Sans 3', sans-serif;
+}
+body { font-size: 18px; line-height: 1.45; font-weight: 400; }
+header h1 { font-size: clamp(25px, 3vw, 36px); line-height: 1.15; font-weight: 600; }
+h2 { font-size: 24px; font-weight: 600; }
 .author { flex-shrink: 0; }
-.author, .open-link, footer, .pdf-controls,
-.contact-form label, .contact-form p, #pdf-message,
-.support-summary p { font-size: 24px; }
-.author-actions { font-size: 22px; }
-.dialog-heading h2 { font-size: 34px; }
-.support-summary strong { font-size: 36px; }
-button, input, textarea { font-family: inherit; }
+.author, .author-name { font-size: 17px; }
+.author-actions { font-size: 16px; }
+.open-link, .icon-label, footer, footer > p, .pdf-controls { font-size: 16px; }
+.contact-form label, .contact-form p, .pdf-message, .support-summary p { font-size: 16px; }
+.dialog-heading h2 { font-size: 26px; }
+.support-summary strong { font-size: 30px; }
+button, input, textarea, select { font-family: inherit; }
 footer em { font-style: italic; }
+.page-index { font-size: 16px; line-height: 1.25; }
+.contents-heading, .page-index > summary { font-weight: 700; -webkit-text-stroke: 0; }
+.todo-panel { font-size: 16px; }
+.todo-panel > summary { font-size: 16px; }
+.todo-content p, .todo-form label { font-size: 14px; }
+.todo-list .todo-add-subtask { font-size: 13px; }
+/* Keep the compact monospace completion labels requested separately. */
 @media (max-width: 650px) {
-  h1 { font-size: 40px; }
-  .author, .open-link, footer, .pdf-controls { font-size: 24px; }
+  header h1 { font-size: 28px; }
 }
-
-/* Compact gallery header, retaining the existing type scale elsewhere. */
-header h1 { font-size: clamp(30.6px, 3.74vw, 44.2px); }
-.author-name { font-size: 20.4px; }
-@media (max-width: 650px) { header h1 { font-size: 34px; } }
