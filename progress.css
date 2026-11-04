@@ -1,28 +1,30 @@
-/* Twelve-pixel vertical strip, separated from the preview by three pixels. */
+/* Keep the indicator between the task control and open icon. */
 .gallery .panel-caption {
   position: relative;
   min-height: 36px;
   align-items: center;
+  padding-left: 70px;
 }
-.preview-shell { position: relative; }
 .completion-segments {
-  position: absolute;
-  left: -15px;
-  top: 0;
-  width: 12px;
-  height: 100%;
-  flex-direction: column;
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 16px;
+  flex-direction: row;
   display: flex;
   align-items: center;
-  gap: 0;
-  background: #e34b59;
+  gap: 3px;
+  padding: 3px 2px;
+  border: 1px solid #347fbd;
+  border-radius: 5px;
+  background: #edf4f7;
 }
 .completion-segment {
   display: block;
   flex: 1 1 0;
-  min-height: 0;
-  width: 12px;
-  border-radius: 0;
+  min-width: 0;
+  height: 100%;
+  border-radius: 1px;
   background: #e34b59;
   border: 0;
   box-shadow: none;
@@ -35,13 +37,14 @@
 .completion-segments::before {
   content: attr(data-label);
   position: absolute;
-  left: 18px;
-  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(100% + 5px);
   z-index: 5;
   padding: 3px 6px;
   background: #252a29;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 14px;
+  font-size: 10.5px;
   line-height: 1.5;
   color: #f3f2ed;
   white-space: nowrap;
@@ -53,4 +56,4 @@
 .completion-segments:focus-visible { outline: 1px solid #f3f2ed; outline-offset: 3px; }
 
 /* Leave room for each comparison icon’s hover label. */
-.thought-caption { gap: 120px; }
+.gallery .thought-caption { gap: 12px; padding-left: 0; }
