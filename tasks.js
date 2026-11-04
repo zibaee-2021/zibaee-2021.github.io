@@ -16,6 +16,12 @@ function persist() {
     });
   }
 }
+// Preserve existing flat lists while normalising saved nested tasks.
+function normaliseTasks(value) {
+  if (!Array.isArray(value)) return [];
+  return value.filter(task => task && typeof task.text === 'string' && typeof task.done === 'boolean')
+    .map(task => ({ text: task.text, done: task.done, children: normaliseTasks(task.children) }));
+}
 function createPanel(figure) {
   const panel = document.createElement('details');
   panel.className = 'todo-panel';
@@ -30,28 +36,61 @@ function createPanel(figure) {
   note.textContent = storageAvailable ? 'Saved in this browser only.' : 'Browser storage unavailable. Changes last only for this visit.';
   const list = document.createElement('ul');
   list.className = 'todo-list';
-  const tasks = Array.isArray(saved[figure.id]) ? saved[figure.id].filter(task => task && typeof task.text === 'string' && typeof task.done === 'boolean') : [];
+  const tasks = normaliseTasks(saved[figure.id]);
   saved[figure.id] = tasks;
-  function render() {
-    list.replaceChildren();
-    for (const task of tasks) {
-      const row = document.createElement('li');
-      const label = document.createElement('label');
+  let parentTask = null;
+  function resetTarget() {
+    parentTask = null;
+    label.textContent = 'new task';
+    cancel.hidden = true;
+  }
+  function renderTasks(items, container) {
+    for (const task of items) {
+      const entry = document.createElement('li');
+      const row = document.createElement('div');
+      row.className = 'todo-row';
+      const taskLabel = document.createElement('label');
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
       checkbox.checked = task.done;
       checkbox.addEventListener('change', () => { task.done = checkbox.checked; persist(); });
       const text = document.createElement('span');
       text.textContent = task.text;
-      label.append(checkbox, text);
+      taskLabel.append(checkbox, text);
       const remove = document.createElement('button');
       remove.type = 'button';
       remove.textContent = '×';
       remove.setAttribute('aria-label', `Delete task: ${task.text}`);
-      remove.addEventListener('click', () => { tasks.splice(tasks.indexOf(task), 1); persist(); render(); input.focus(); });
-      row.append(label, remove);
-      list.append(row);
+      remove.addEventListener('click', () => {
+        if (task.children.length && !confirm('Delete this task and all its subtasks?')) return;
+        items.splice(items.indexOf(task), 1);
+        resetTarget(); persist(); render(); input.focus();
+      });
+      row.append(taskLabel, remove);
+      const subtask = document.createElement('button');
+      subtask.type = 'button';
+      subtask.className = 'todo-add-subtask';
+      subtask.textContent = '+ subtask';
+      subtask.setAttribute('aria-label', `Add subtask to: ${task.text}`);
+      subtask.addEventListener('click', () => {
+        parentTask = task;
+        label.textContent = `new subtask for: ${task.text}`;
+        cancel.hidden = false;
+        input.focus();
+      });
+      entry.append(row, subtask);
+      if (task.children.length) {
+        const children = document.createElement('ul');
+        children.className = 'todo-list todo-subtasks';
+        renderTasks(task.children, children);
+        entry.append(children);
+      }
+      container.append(entry);
     }
+  }
+  function render() {
+    list.replaceChildren();
+    renderTasks(tasks, list);
   }
   const form = document.createElement('form');
   form.className = 'todo-form';
@@ -65,12 +104,17 @@ function createPanel(figure) {
   const add = document.createElement('button');
   add.type = 'submit';
   add.textContent = 'add';
-  form.append(label, input, add);
+  const cancel = document.createElement('button');
+  cancel.type = 'button';
+  cancel.textContent = 'cancel subtask';
+  cancel.hidden = true;
+  cancel.addEventListener('click', () => { resetTarget(); input.focus(); });
+  form.append(label, input, add, cancel);
   form.addEventListener('submit', event => {
     event.preventDefault();
     const text = input.value.trim();
     if (!text) return;
-    tasks.push({ text, done: false });
+    (parentTask ? parentTask.children : tasks).push({ text, done: false, children: [] });
     persist(); render(); input.value = ''; input.focus();
   });
   render();
