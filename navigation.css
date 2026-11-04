@@ -91,17 +91,29 @@ footer > p { margin-left: auto; text-align: right; }
 .contents-section > summary::before {
   content: '';
   position: absolute;
-  left: -13px;
-  top: 8px;
-  width: 5px;
-  height: 6px;
+  left: -14.25px;
+  top: 6.5px;
+  width: 7.5px;
+  height: 9px;
   background: currentColor;
-  clip-path: polygon(10% 3%, 98% 50%, 10% 97%);
+  /* Gently curved corners, with the same filled silhouette. */
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 12'%3E%3Cpath d='M1 1.1Q1 .36 1.65 .78L9.15 5.58Q9.8 6 9.15 6.42L1.65 11.22Q1 11.64 1 10.9Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 12'%3E%3Cpath d='M1 1.1Q1 .36 1.65 .78L9.15 5.58Q9.8 6 9.15 6.42L1.65 11.22Q1 11.64 1 10.9Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
   transform: rotate(-3deg);
   transform-origin: 50% 50%;
   transition: transform 180ms ease;
 }
 .contents-section[open] > summary::before { transform: rotate(87deg); }
+/* Double the original arrow target's width and height without moving text.
+   This transparent part of the summary also toggles its native details. */
+.contents-section > summary::after {
+  content: '';
+  position: absolute;
+  left: -15.5px;
+  top: 5px;
+  width: 10px;
+  height: 12px;
+}
 @media (prefers-reduced-motion: reduce) {
   .contents-section > summary::before { transition: none; }
 }
