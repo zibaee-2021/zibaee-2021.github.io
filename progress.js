@@ -36,5 +36,9 @@ for (const item of document.querySelectorAll('.gallery figure')) {
     light.setAttribute('aria-hidden', 'true');
     indicator.append(light);
   }
-  caption.prepend(indicator);
+  const preview = item.querySelector('.preview');
+  const shell = document.createElement('div');
+  shell.className = 'preview-shell';
+  preview.before(shell);
+  shell.append(indicator, preview);
 }

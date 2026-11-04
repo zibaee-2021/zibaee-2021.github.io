@@ -1,15 +1,17 @@
-/* Twelve-pixel strip with a three-pixel gap above the preview. */
+/* Twelve-pixel vertical strip, separated from the preview by three pixels. */
 .gallery .panel-caption {
   position: relative;
   min-height: 36px;
   align-items: center;
 }
+.preview-shell { position: relative; }
 .completion-segments {
   position: absolute;
-  left: 0;
-  bottom: -9px;
-  width: 100%;
-  height: 12px;
+  left: -15px;
+  top: 0;
+  width: 12px;
+  height: 100%;
+  flex-direction: column;
   display: flex;
   align-items: center;
   gap: 0;
@@ -18,8 +20,8 @@
 .completion-segment {
   display: block;
   flex: 1 1 0;
-  min-width: 0;
-  height: 12px;
+  min-height: 0;
+  width: 12px;
   border-radius: 0;
   background: #e34b59;
   border: 0;
@@ -33,10 +35,11 @@
 .completion-segments::before {
   content: attr(data-label);
   position: absolute;
-  left: 0;
-  /* Align the label with the open-icon caption text. */
-  top: -15px;
-  transform: translateY(-50%);
+  left: 18px;
+  top: 8px;
+  z-index: 5;
+  padding: 3px 6px;
+  background: #252a29;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   font-size: 14px;
   line-height: 1.5;

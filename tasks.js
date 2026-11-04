@@ -78,11 +78,6 @@ function createPanel(figure) {
   panel.append(summary, content);
   return panel;
 }
-const gallery = document.querySelector('.gallery');
-const figures = [...gallery.querySelectorAll(':scope > figure:not(.ideas)')];
-for (let i = 0; i < figures.length; i += 2) {
-  const row = document.createElement('div');
-  row.className = 'project-row';
-  gallery.insertBefore(row, figures[i]);
-  for (const figure of figures.slice(i, i + 2)) row.append(figure, createPanel(figure));
+for (const figure of document.querySelectorAll('.gallery figure:not(.ideas)')) {
+  figure.querySelector('.panel-caption').prepend(createPanel(figure));
 }
