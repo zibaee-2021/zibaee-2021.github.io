@@ -34,8 +34,7 @@
 }
 .gallery .panel-caption .open-link { flex-shrink: 0; }
 
-.completion-segments::before {
-  content: attr(data-label);
+.completion-label {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -51,8 +50,9 @@
   opacity: 0;
   pointer-events: none;
 }
-.completion-segments:hover::before,
-.completion-segments:focus-visible::before { opacity: 1; }
+.completion-tilde { margin-right: 0.5ch; }
+.completion-segments:hover .completion-label,
+.completion-segments:focus-visible .completion-label { opacity: 1; }
 .completion-segments:focus-visible { outline: 1px solid #f3f2ed; outline-offset: 3px; }
 
 /* Leave room for each comparison icon’s hover label. */

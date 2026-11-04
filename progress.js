@@ -26,10 +26,21 @@ for (const item of document.querySelectorAll('.gallery figure')) {
   const indicator = document.createElement('span');
   indicator.className = 'completion-segments';
   indicator.setAttribute('role', 'img');
-  const description = rated ? `~${score}/10 complete` : 'Completion not yet rated';
+  const description = rated ? `~ ${score}/10 complete` : 'Completion not yet rated';
   indicator.setAttribute('aria-label', description);
   indicator.tabIndex = 0;
-  indicator.dataset.label = description;
+  const label = document.createElement('span');
+  label.className = 'completion-label';
+  label.setAttribute('aria-hidden', 'true');
+  if (rated) {
+    const tilde = document.createElement('span');
+    tilde.className = 'completion-tilde';
+    tilde.textContent = '~';
+    label.append(tilde, `${score}/10 complete`);
+  } else {
+    label.textContent = description;
+  }
+  indicator.append(label);
   for (let dot = 1; dot <= 10; dot++) {
     const light = document.createElement('span');
     light.className = 'completion-segment' + (rated && dot <= score ? ' is-lit' : '');

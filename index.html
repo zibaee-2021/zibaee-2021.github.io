@@ -50,7 +50,7 @@ dialog::backdrop{background:#18252066}
 header{padding-bottom:16px}
 .open-link{position:relative;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:0;background:transparent;text-decoration:none}
 .open-link svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.icon-label{position:absolute;top:50%;right:calc(100% + 6px);transform:translateY(-50%);white-space:nowrap;color:inherit;font-size:20px;opacity:0;pointer-events:none}
+.icon-label{position:absolute;bottom:calc(50% + 12px);padding:3px 6px;left:50%;transform:translateX(-50%);white-space:nowrap;color:inherit;font-size:20px;opacity:0;pointer-events:none}
 .open-link:hover .icon-label,.open-link:focus-visible .icon-label{opacity:1}
 .page-turn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:50%;background:#231f20;color:white;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:auto;cursor:pointer;z-index:2}
 .page-turn svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
@@ -68,9 +68,9 @@ header{padding-bottom:16px}
 </style>
 <link rel="stylesheet" href="navigation.css?v=triangles-5">
 <link rel="stylesheet" href="art-preview.css?v=guijarro-1">
-<link rel="stylesheet" href="progress.css?v=20261104-top-segments">
+<link rel="stylesheet" href="progress.css?v=20261104-half-space">
 <link rel="stylesheet" href="tasks.css?v=20261103-nested">
-<link rel="stylesheet" href="typography.css?v=source-sans-3">
+<link rel="stylesheet" href="typography.css?v=matching-labels-20261104">
 </head>
 <body>
 <header id="top"><h1>simple algorithms &amp; experiments</h1>
@@ -179,7 +179,7 @@ header{padding-bottom:16px}
 <div class="pdf-controls"><span class="pdf-counter" role="status" aria-live="polite">Loading…</span></div>
 </figure>
 <figure class="ideas" id="ideas" tabindex="-1" aria-label="Ideas and brainstorming" data-index-group="Experiments" data-index-label="thought">
-<figcaption class="panel-caption thought-caption"><a class="open-link thought-option" href="https://zibaee-2021.github.io/" target="_blank" rel="noopener" aria-label="open thoughts (network icon)"><svg viewBox="0 0 32 40" aria-hidden="true"><defs><mask id="thought-network-cutouts"><rect width="32" height="40" fill="white" stroke="none"/><g stroke="black" stroke-width="1.5" fill="none"><path d="M17 14L12 6M20 14l6-7M21 17l8 1M16 19l-8 5M19 20l3 10"/><circle cx="18" cy="17" r="3.5"/><circle cx="12" cy="6" r="1.8"/><circle cx="26" cy="7" r="1.8"/><circle cx="29" cy="18" r="1.8"/><circle cx="8" cy="24" r="1.8"/><circle cx="22" cy="30" r="1.8"/></g></mask></defs><path style="fill:#fff;stroke:none" mask="url(#thought-network-cutouts)" d="M12 39h18c-3-7-3-11-1-17C36 5 24 0 17 1 5 1 3 10 3 16L0 22l3 2v5c0 3 2 3 6 3 3 1 3 4 3 7z"/></svg><span class="icon-label">open thoughts</span></a><a class="open-link thought-option" href="https://zibaee-2021.github.io/" target="_blank" rel="noopener" aria-label="open thoughts (gear icon)"><svg viewBox="0 0 40 40" aria-hidden="true"><g style="stroke:#fff;stroke-width:1.8;fill:none"><path d="M17 2C8 3 6 8 5 15L1 23c-1 2 2 3 4 4l1 5c1 4 5 4 8 4v3M33 27c-3 5-3 8-3 12"/><path stroke-linejoin="miter" d="M25 2h4l1 4 3 1 3-2 3 3-2 3 1 3 4 1v4l-4 1-1 3 2 3-3 3-3-2-3 1-1 4h-4l-1-4-3-1-3 2-3-3 2-3-1-3-4-1v-4l4-1 1-3-2-3 3-3 3 2 3-1z" transform="translate(-1 0) scale(.95)"/><circle cx="24.6" cy="16.2" r="4"/></g></svg><span class="icon-label">open thoughts</span></a></figcaption>
+<figcaption class="panel-caption thought-caption"><a class="open-link thought-option" href="https://zibaee-2021.github.io/" target="_blank" rel="noopener" aria-label="open thoughts"><svg viewBox="0 0 40 40" aria-hidden="true"><g style="stroke:#fff;stroke-width:1.8;fill:none"><path d="M17 2C8 3 6 8 5 15L1 23c-1 2 2 3 4 4l1 5c1 4 5 4 8 4v3M33 27c-3 5-3 8-3 12"/><g transform="translate(28 13) scale(.72) translate(-24.6 -16.2)"><path stroke-linejoin="miter" d="M25 2h4l1 4 3 1 3-2 3 3-2 3 1 3 4 1v4l-4 1-1 3 2 3-3 3-3-2-3 1-1 4h-4l-1-4-3-1-3 2-3-3 2-3-1-3-4-1v-4l4-1 1-3-2-3 3-3 3 2 3-1z" transform="translate(-1 0) scale(.95)"/><circle cx="24.6" cy="16.2" r="4"/></g></g></svg><span class="icon-label">open thoughts</span></a></figcaption>
 <div class="preview board" role="img" aria-label="Thought experiments on squared notebook paper: a proposition/subjective conditional... leads to experiments to test this, in silico, then discovery."><svg viewBox="0 0 594 420" aria-hidden="true"><text x="42" y="40" class="chalk" font-size="23"><tspan x="42" dy="0">A space for thought experiments to lead to</tspan><tspan x="42" dy="29">hypothesis generation and experiments in silico.</tspan></text><text x="121" y="144" text-anchor="middle" class="chalk" font-size="21"><tspan x="121">a proposition/</tspan><tspan x="121" dy="23">subjective</tspan><tspan x="121" dy="23">conditional...</tspan></text><ellipse cx="121" cy="160" rx="91" ry="40"></ellipse><path d="M215 160Q250 142 280 158M268 146L283 158L269 167"></path><text x="380" y="148" text-anchor="middle" class="chalk" font-size="23"><tspan x="380">experiments to test this,</tspan><tspan x="380" dy="25">in silico</tspan></text><path d="M293 182Q378 187 464 180M392 204Q398 250 342 272M347 257L340 274L356 273"></path><text x="280" y="310" text-anchor="middle" class="chalk" font-size="28">discovery</text><path d="M199 322Q281 329 368 320M180 292Q84 277 110 215M98 225L110 211L118 228"></path><text x="389" y="368" class="chalk" font-size="18" transform="rotate(-5 389 368)">keep exploring.</text></svg></div>
 
 </figure>
@@ -198,7 +198,7 @@ header{padding-bottom:16px}
 <button class="contact-send" id="contact-send" type="submit" disabled>send message</button>
 </form>
 </dialog>
-<script type="module" src="progress.js?v=20261104-top-segments"></script>
+<script type="module" src="progress.js?v=20261104-half-space"></script>
 <script type="module" src="tasks.js?v=20261103-nested"></script>
 <script type="module" src="contact.js"></script>
 <script type="module" src="support.js"></script>
