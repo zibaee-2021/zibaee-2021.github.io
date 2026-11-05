@@ -1,3 +1,11 @@
+/* Use the installed font for preview; no font file is redistributed. */
+@font-face {
+  font-family: 'Scientific Graphics Preview';
+  src: local('Scientific Graphics Regular'), local('ScientificGraphics-Regular'), local('Scientific Graphics');
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+}
 @font-face {
   font-family: 'Source Sans 3';
   src: url('./fonts/source-sans-3/regular.ttf') format('truetype');
@@ -24,7 +32,7 @@ body, h1, h2, .chalk, .support-summary strong,
   font-family: 'Source Sans 3', sans-serif;
 }
 body { font-size: 18px; line-height: 1.45; font-weight: 400; }
-header h1 { font-size: clamp(25px, 3vw, 36px); line-height: 1.15; font-weight: 600; }
+header h1 { font-size: clamp(12.5px, 1.5vw, 18px); line-height: 1.5; font-weight: 600; color: var(--muted); }
 h2 { font-size: 24px; font-weight: 600; }
 .author { flex-shrink: 0; }
 .author, .author-name { font-size: 17px; }
@@ -50,5 +58,39 @@ footer em { font-style: italic; }
 .todo-list .todo-add-subtask { font-size: 13px; }
 /* Keep the compact monospace completion labels requested separately. */
 @media (max-width: 650px) {
-  header h1 { font-size: 28px; }
+  header h1 { font-size: 14px; }
+}
+
+header h1, .author-name {
+  font-family: 'Scientific Graphics Preview', 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+}
+
+/* Align the author with the title rather than the top of its click target. */
+header .author {
+  position: absolute;
+  top: 55px;
+  left: min(0px, calc(50% - 688px));
+  height: 27px;
+  display: flex;
+  align-items: baseline;
+}
+/* A zero-width title-sized strut aligns both fonts on the same baseline. */
+header .author::before {
+  content: '\200B';
+  width: 0;
+  font-family: 'Scientific Graphics Preview', 'Source Sans 3', sans-serif;
+  font-size: clamp(12.5px, 1.5vw, 18px);
+  font-weight: 400;
+  line-height: 1.5;
+}
+header .author-name { padding: 0; font-size: 12.75px; }
+@media (max-width: 1199px) {
+  header { display: flex; align-items: baseline; gap: 24px; }
+  header .author { position: relative; top: auto; left: auto; height: auto; margin-top: 0; order: -1; }
+  header h1 { flex: 1; min-width: 0; }
+}
+@media (max-width: 650px) {
+  header .author::before { font-size: 14px; }
 }
