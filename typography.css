@@ -67,23 +67,24 @@ header h1, .author-name {
   font-synthesis: none;
 }
 
-/* Align the author with the title rather than the top of its click target. */
+/* Anchor the stacked author name to the page corner. */
 header .author {
   position: absolute;
-  top: auto;
-  bottom: 10px;
-  left: max(calc(50% - 50vw + 12px), calc(50% - 700px));
+  top: 8px;
+  bottom: auto;
+  left: calc(50% - 50vw + 8px);
+  margin-top: 0;
   height: auto;
   display: flex;
   align-items: baseline;
 }
-header .author-name { padding: 0; font-size: clamp(8.8542px, 1.0625vw, 12.75px); line-height: 1.9; text-align: left; }
+header .author-name { padding: 0; font-size: clamp(6.375px, 0.765vw, 9.18px); color: #3e423e; line-height: 1.9; text-align: left; }
 header .author-name span { display: block; }
 @media (max-width: 1199px) {
   header { display: flex; align-items: baseline; gap: 24px; }
-  header .author { position: relative; top: auto; bottom: auto; left: auto; height: auto; margin-top: 0; order: -1; }
   header h1 { flex: 1; min-width: 0; }
 }
 @media (max-width: 650px) {
-  header .author-name { font-size: 9.9167px; }
+  header { padding-top: 56px; }
+  header .author-name { font-size: 7.14px; }
 }
