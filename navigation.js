@@ -1,3 +1,10 @@
+const header = document.getElementById('top');
+function updateHeaderHeight() {
+  document.documentElement.style.setProperty('--site-header-height', `${header.getBoundingClientRect().height}px`);
+}
+new ResizeObserver(updateHeaderHeight).observe(header);
+updateHeaderHeight();
+
 const menu = document.getElementById('page-index');
 const nav = document.getElementById('index-links');
 const sections = [...document.querySelectorAll('[data-index-group][data-index-label][id]')];
@@ -57,7 +64,7 @@ let scheduled = false;
 function update() {
   scheduled = false;
   if (pendingTarget) { select(pendingTarget); return; }
-  const offset = compact.matches ? 64 : 28;
+  const offset = header.getBoundingClientRect().height + (compact.matches ? 64 : 28);
   const visible = sections.map(section => ({ section, rect: section.getBoundingClientRect() }))
     .filter(({ rect }) => rect.bottom > offset && rect.top < innerHeight);
   if (!visible.length) return;
@@ -103,3 +110,10 @@ menu.addEventListener('toggle', updateMarginSegments, true);
 window.addEventListener('resize', updateMarginSegments);
 document.fonts.ready.then(updateMarginSegments);
 updateMarginSegments();
+
+// A sticky header is already in view; explicitly scroll to the document top.
+document.querySelector('.back-to-top')?.addEventListener('click', event => {
+  event.preventDefault();
+  history.replaceState(null, '', '#top');
+  window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+});

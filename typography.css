@@ -88,3 +88,15 @@ header .author-name span { display: block; }
   header { padding-top: 56px; }
   header .author-name { font-size: 7.14px; }
 }
+
+/* Keep the complete paper header visible throughout the gallery. */
+header#top { position: sticky; top: 0; z-index: 10; }
+.page-index {
+  top: max(170px, calc(var(--site-header-height, 100px) + 20px));
+  max-height: calc(100dvh - max(170px, calc(var(--site-header-height, 100px) + 20px)) - 24px);
+}
+[data-index-label] { scroll-margin-top: calc(var(--site-header-height, 100px) + 28px); }
+@media (max-width: 1199px) {
+  .page-index { top: var(--site-header-height, 100px); max-height: calc(100dvh - var(--site-header-height, 100px) - 16px); }
+  [data-index-label] { scroll-margin-top: calc(var(--site-header-height, 100px) + 64px); }
+}
