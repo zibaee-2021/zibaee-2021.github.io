@@ -48,7 +48,23 @@
 /* Read-only repository lists use hierarchical numbering instead of controls. */
 .todo-numbered { list-style: none; margin: 0; padding: 0; }
 .todo-numbered > li { margin: 10px 0; }
+.todo-content > .todo-numbered > li:first-child { margin-top: 0; }
 .todo-numbered .todo-numbered { margin-left: 18px; }
 .todo-numbered-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 7px; }
 .todo-numbered-row > span:last-child { overflow-wrap: anywhere; }
 .todo-completed { text-decoration: line-through; opacity: .6; }
+
+/* One continuous paper image beneath the title and scrolling task list. */
+.todo-panel[open] {
+  width: min(520px, 100%);
+  aspect-ratio: 1238 / 1142;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(#f5eddbd3, #f5eddbd3),
+    url('./assets/todo-notebook-background.png') center / contain no-repeat;
+  background-color: #f5eddb;
+}
+.todo-panel[open] > summary { flex-shrink: 0; }
+.todo-panel[open] > .todo-content { flex: 1; min-height: 0; max-height: none; }
+.todo-panel[open] > summary,
+.todo-panel[open] > .todo-content { background: transparent; }
