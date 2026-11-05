@@ -1,127 +1,38 @@
-const storageKey = 'sz-gallery-tasks-v1';
-let saved = {};
-let storageAvailable = true;
-try {
-  const parsed = JSON.parse(localStorage.getItem(storageKey) || '{}');
-  if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) saved = parsed;
-} catch { storageAvailable = false; }
+import { createRepositoryPanel } from './repository-tasks.js?v=4';
 
-function persist() {
-  try {
-    localStorage.setItem(storageKey, JSON.stringify(saved));
-  } catch {
-    storageAvailable = false;
-    document.querySelectorAll('.todo-storage').forEach(note => {
-      note.textContent = 'Browser storage unavailable. Changes last only for this visit.';
-    });
+const sources = {
+  'salsa-app': 'https://salsa-maru.onrender.com/public/todo.md',
+  'ada-app': 'https://ada-khcz.onrender.com/api/public-todo',
+  'lagtime-app': 'https://lagtime-estimator.onrender.com/public/todo.md',
+  'amyloid-experiments': 'https://salsa-maru.onrender.com/public/amyloid-experiments.md',
+  'helical-experiments': 'https://salsa-maru.onrender.com/public/helical-experiments.md',
+  'salsa-manuscript': './tasks/manuscripts/salsa-webapp.md',
+  'ada-manuscript': './tasks/manuscripts/ada.md',
+  'lagtime-manuscript': './tasks/manuscripts/lagtime-calculator.md',
+  'amyloid-manuscript': './tasks/manuscripts/amyloid-beta-sheet-contiguity.md',
+  'helical-manuscript': './tasks/manuscripts/salsa-helical-amphipathicity.md',
+  'ideas': './TodoList/thought-experiments.md',
+};
+const localPreview = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
+for (const figure of document.querySelectorAll('.gallery figure')) {
+  const source = localPreview ? `/__preview/tasks/${figure.id}.md` : sources[figure.id];
+  if (!sources[figure.id]) continue;
+  figure.querySelector('.panel-caption').prepend(createRepositoryPanel(figure, source));
+}
+
+function closeTaskPanelsOutside(target) {
+  for (const panel of document.querySelectorAll('.todo-panel[open]')) {
+    if (!panel.contains(target)) panel.open = false;
   }
 }
-// Preserve existing flat lists while normalising saved nested tasks.
-function normaliseTasks(value) {
-  if (!Array.isArray(value)) return [];
-  return value.filter(task => task && typeof task.text === 'string' && typeof task.done === 'boolean')
-    .map(task => ({ text: task.text, done: task.done, children: normaliseTasks(task.children) }));
-}
-function createPanel(figure) {
-  const panel = document.createElement('details');
-  panel.className = 'todo-panel';
-  const title = figure.getAttribute('aria-label') || figure.id;
-  const summary = document.createElement('summary');
-  summary.textContent = 'to do';
-  summary.setAttribute('aria-label', `To do: ${title}`);
-  const content = document.createElement('div');
-  content.className = 'todo-content';
-  const note = document.createElement('p');
-  note.className = 'todo-storage';
-  note.textContent = storageAvailable ? 'Saved in this browser only.' : 'Browser storage unavailable. Changes last only for this visit.';
-  const list = document.createElement('ul');
-  list.className = 'todo-list';
-  const tasks = normaliseTasks(saved[figure.id]);
-  saved[figure.id] = tasks;
-  let parentTask = null;
-  function resetTarget() {
-    parentTask = null;
-    label.textContent = 'new task';
-    cancel.hidden = true;
-  }
-  function renderTasks(items, container) {
-    for (const task of items) {
-      const entry = document.createElement('li');
-      const row = document.createElement('div');
-      row.className = 'todo-row';
-      const taskLabel = document.createElement('label');
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.checked = task.done;
-      checkbox.addEventListener('change', () => { task.done = checkbox.checked; persist(); });
-      const text = document.createElement('span');
-      text.textContent = task.text;
-      taskLabel.append(checkbox, text);
-      const remove = document.createElement('button');
-      remove.type = 'button';
-      remove.textContent = '×';
-      remove.setAttribute('aria-label', `Delete task: ${task.text}`);
-      remove.addEventListener('click', () => {
-        if (task.children.length && !confirm('Delete this task and all its subtasks?')) return;
-        items.splice(items.indexOf(task), 1);
-        resetTarget(); persist(); render(); input.focus();
-      });
-      row.append(taskLabel, remove);
-      const subtask = document.createElement('button');
-      subtask.type = 'button';
-      subtask.className = 'todo-add-subtask';
-      subtask.textContent = '+ subtask';
-      subtask.setAttribute('aria-label', `Add subtask to: ${task.text}`);
-      subtask.addEventListener('click', () => {
-        parentTask = task;
-        label.textContent = `new subtask for: ${task.text}`;
-        cancel.hidden = false;
-        input.focus();
-      });
-      entry.append(row, subtask);
-      if (task.children.length) {
-        const children = document.createElement('ul');
-        children.className = 'todo-list todo-subtasks';
-        renderTasks(task.children, children);
-        entry.append(children);
-      }
-      container.append(entry);
+// Capture also handles outside controls that stop click propagation.
+document.addEventListener('click', event => closeTaskPanelsOutside(event.target), true);
+// Clicks inside embedded apps do not bubble to this document. When focus
+// enters an iframe, dismiss the gallery panels without blocking the app.
+window.addEventListener('blur', () => {
+  setTimeout(() => {
+    if (document.activeElement instanceof HTMLIFrameElement) {
+      closeTaskPanelsOutside(document.activeElement);
     }
-  }
-  function render() {
-    list.replaceChildren();
-    renderTasks(tasks, list);
-  }
-  const form = document.createElement('form');
-  form.className = 'todo-form';
-  const label = document.createElement('label');
-  label.textContent = 'new task';
-  const input = document.createElement('input');
-  input.id = `task-input-${figure.id}`;
-  input.maxLength = 300;
-  input.required = true;
-  label.htmlFor = input.id;
-  const add = document.createElement('button');
-  add.type = 'submit';
-  add.textContent = 'add';
-  const cancel = document.createElement('button');
-  cancel.type = 'button';
-  cancel.textContent = 'cancel subtask';
-  cancel.hidden = true;
-  cancel.addEventListener('click', () => { resetTarget(); input.focus(); });
-  form.append(label, input, add, cancel);
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    const text = input.value.trim();
-    if (!text) return;
-    (parentTask ? parentTask.children : tasks).push({ text, done: false, children: [] });
-    persist(); render(); input.value = ''; input.focus();
-  });
-  render();
-  content.append(note, list, form);
-  panel.append(summary, content);
-  return panel;
-}
-for (const figure of document.querySelectorAll('.gallery figure:not(.ideas)')) {
-  figure.querySelector('.panel-caption').prepend(createPanel(figure));
-}
+  }, 0);
+});

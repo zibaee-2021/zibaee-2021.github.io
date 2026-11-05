@@ -1,3 +1,7 @@
 .DS_Store
 salsa-preview.jpg
 node_modules/
+
+# Local Python preview artifacts
+__pycache__/
+*.pyc

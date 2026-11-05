@@ -18,7 +18,7 @@ SALSA changes deploy separately through its own GitHub repository and Render. Re
 
 ## Local preview
 
-Run `python3 -m http.server 8765 --bind 127.0.0.1` and open http://127.0.0.1:8765/. A local gallery cannot embed production SALSA because only the published Pages origin is allowed; test live embedding on the published site.
+Run `python3 preview_server.py` and open http://127.0.0.1:8765/. A local gallery cannot embed production SALSA because only the published Pages origin is allowed; test live embedding on the published site.
 
 ## Publication
 
@@ -46,3 +46,49 @@ The gallery and donation page use locally hosted Reenie Beanie, with its SIL Ope
 The fixed left-hand index groups Apps, Manuscripts and Ideas. At widths below 1200px it becomes a sticky expandable menu. Links use native URL fragments, smooth scrolling (unless reduced motion is preferred), keyboard focus and active-section highlighting.
 
 To add an entry, append its figure/section inside `.gallery`, give it a unique `id`, `tabindex="-1"`, a descriptive `aria-label`, `data-index-group="Manuscripts"` (or Apps/Ideas), and `data-index-label="Your title"`. `navigation.js` discovers entries automatically. Update the static fallback links in `index.html` too. Sections can link to each other using these IDs, allowing several manuscripts to refer to one app without duplicating the app. Additional live PDF viewers will need their own viewer instances; do not duplicate the existing PDF control IDs.
+
+## Repository-backed task lists
+
+Every gallery item now has a read-only, numbered Markdown task list. Lists are
+fetched when opened; close and reopen to load edits. No browser edits are saved.
+Previous browser-local lists are left untouched in localStorage, not published.
+
+| Gallery item | Authoritative source |
+| --- | --- |
+| SALSA app | `../SALSA/TodoList/TODO.md` |
+| ADA app | `../ADA/app/TodoList/TODO.md` |
+| Lagtime app | `../LagtimeEstimator/TodoList/TODO.md` |
+| Amyloid experiments | `../SALSA/TodoList/amyloid-experiments.md` |
+| Helical experiments | `../SALSA/TodoList/helical-experiments.md` |
+| Five manuscripts | `~/Documents/Manuscripts/manuscripts/TodoList/<manuscript-id>.md` |
+| Thought board | `TodoList/thought-experiments.md` in this website repository |
+
+App/experiment lists are published via read-only endpoints on their corresponding
+Render service after a successful deployment. Only explicitly selected task files
+are public; credentials and other repository files are not exposed.
+
+Manuscript IDs are salsa-webapp, ada, lagtime-calculator,
+amyloid-beta-sheet-contiguity, and salsa-helical-amphipathicity. Their private
+repository's Publish manuscript task lists workflow uses the existing
+PAGES_PUBLISH_TOKEN to update only `tasks/manuscripts/*.md` in this website.
+Those website files are published copies, not the editing source. This does not
+require a LaTeX build. The workflow respects the manuscript publication switch.
+
+If a manuscript has `TodoList/TODO.md` in its Overleaf source directory, that
+file takes precedence after the usual Overleaf sync. Otherwise the repository's
+top-level TodoList file is used. Never edit the synced source directories locally:
+the next Overleaf sync replaces them. Top-level TodoList files survive that sync.
+
+Use Markdown checkboxes (`- [ ]`, `- [x]`) and two spaces per nesting level.
+The gallery displays hierarchical numbers (1, 1.1, 1.2, 2) and strikes through
+completed tasks. A heading-only file displays “No tasks listed yet.”
+All task files are intended to be public: keep private notes out of them.
+
+### Preview unpublished task edits
+
+Run `python3 preview_server.py --port 8766` and open the printed localhost URL.
+The server binds only to 127.0.0.1 and reads an explicit allowlist of files in the
+local project repositories above. No app server or deployment is required for
+these lists. Close and reopen a panel after editing its Markdown file.
+The ordinary `python3 -m http.server` command cannot serve those local sources.
+Restart preview_server.py after changing its code or file mapping.

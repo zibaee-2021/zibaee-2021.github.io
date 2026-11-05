@@ -56,4 +56,4 @@
 .completion-segments:focus-visible { outline: 1px solid #f3f2ed; outline-offset: 3px; }
 
 /* Leave room for each comparison icon’s hover label. */
-.gallery .thought-caption { gap: 12px; padding-left: 0; }
+.gallery .thought-caption { gap: 12px; }
