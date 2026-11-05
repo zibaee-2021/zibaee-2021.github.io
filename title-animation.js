@@ -1,4 +1,5 @@
 const title = document.querySelector('header h1');
+const authorName = document.querySelector('.author-name');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 if (title) {
   const text = title.textContent;
@@ -41,7 +42,23 @@ if (title) {
       }
       return letter.animate(frames, { duration, iterations: Infinity, easing: 'linear' });
     });
+
   }
   animateLetters();
   reducedMotion.addEventListener('change', animateLetters);
+}
+
+// Measure the installed font rather than assuming its glyphs fit an em box.
+if (authorName) {
+  const context = document.createElement('canvas').getContext('2d');
+  function spaceAuthorLines() {
+    const style = getComputedStyle(authorName);
+    context.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+    const metrics = [...authorName.querySelectorAll('span')].map(line => context.measureText(line.textContent));
+    const height = Math.max(...metrics.map(m => m.actualBoundingBoxAscent))
+      + Math.max(...metrics.map(m => m.actualBoundingBoxDescent));
+    authorName.style.lineHeight = `${height + parseFloat(style.fontSize) * 0.30}px`;
+  }
+  document.fonts.ready.then(spaceAuthorLines);
+  window.addEventListener('resize', spaceAuthorLines);
 }

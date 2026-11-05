@@ -70,27 +70,20 @@ header h1, .author-name {
 /* Align the author with the title rather than the top of its click target. */
 header .author {
   position: absolute;
-  top: 55px;
-  left: min(0px, calc(50% - 688px));
-  height: 27px;
+  top: auto;
+  bottom: 10px;
+  left: max(calc(50% - 50vw + 12px), calc(50% - 700px));
+  height: auto;
   display: flex;
   align-items: baseline;
 }
-/* A zero-width title-sized strut aligns both fonts on the same baseline. */
-header .author::before {
-  content: '\200B';
-  width: 0;
-  font-family: 'Scientific Graphics Preview', 'Source Sans 3', sans-serif;
-  font-size: clamp(12.5px, 1.5vw, 18px);
-  font-weight: 400;
-  line-height: 1.5;
-}
-header .author-name { padding: 0; font-size: 12.75px; }
+header .author-name { padding: 0; font-size: clamp(8.8542px, 1.0625vw, 12.75px); line-height: 1.9; text-align: left; }
+header .author-name span { display: block; }
 @media (max-width: 1199px) {
   header { display: flex; align-items: baseline; gap: 24px; }
-  header .author { position: relative; top: auto; left: auto; height: auto; margin-top: 0; order: -1; }
+  header .author { position: relative; top: auto; bottom: auto; left: auto; height: auto; margin-top: 0; order: -1; }
   header h1 { flex: 1; min-width: 0; }
 }
 @media (max-width: 650px) {
-  header .author::before { font-size: 14px; }
+  header .author-name { font-size: 9.9167px; }
 }
